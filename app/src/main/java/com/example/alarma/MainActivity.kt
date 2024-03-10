@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.*
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
@@ -34,9 +34,11 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.alarma.ui.theme.AlarmaTheme
 import kotlinx.coroutines.launch
+
 import com.example.alarma.ui.theme.Typography
 
 
+@ExperimentalMaterial3Api
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +62,9 @@ class MainActivity : ComponentActivity() {
                     drawerState = drawerState,
                     drawerContent = {
                         ModalDrawerSheet {
-                            Text("Menú", modifier = Modifier.padding(16.dp))
+                            Text("Menú",
+                                modifier = Modifier.padding(16.dp),
+                                style = Typography.titleLarge,)
                             HorizontalDivider()
                             NavigationDrawerItem(
                                 label = { Text(text = "Home") },
@@ -125,7 +129,7 @@ class MainActivity : ComponentActivity() {
                             startDestination = Routes.PantallaHome.route
                         ) {
                             composable(Routes.PantallaHome.route) {
-                                PantallaHome()
+                                PantallaHome(navigationController)
                             }
                             composable(Routes.PantallaCrearAlarma.route) {
                                 PantallaCrearAlarma()
@@ -152,5 +156,5 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    PantallaHome()
+    PantallaSuscripcion()
 }

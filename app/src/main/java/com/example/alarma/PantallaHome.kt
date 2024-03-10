@@ -23,14 +23,23 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.alarma.ui.theme.Typography
 
+import com.example.alarma.ui.theme.AlarmaTheme
+
+
 @Composable
-fun PantallaHome(){
+fun PantallaHome( navController: NavHostController){
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(vertical = 100.dp),
+            .padding(
+                top = 100.dp,
+                start = 0.dp,
+                end = 0.dp,
+                bottom = 0.dp
+            ),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         item {
@@ -80,7 +89,7 @@ fun PantallaHome(){
                 contentAlignment = Alignment.Center
             ) {
                 Button(
-                    onClick = {  },
+                    onClick = { navController.navigate(Routes.PantallaCrearAlarma.route) },
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text("Crear alarma para pausa activa",

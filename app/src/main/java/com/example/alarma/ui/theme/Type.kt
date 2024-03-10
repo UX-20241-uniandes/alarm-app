@@ -92,5 +92,13 @@ val Typography = Typography(
     fontWeight = FontWeight.Bold,
     fontSize = 14.sp,
     lineHeight = 20.sp
+    ),
+
+    /*Acción*/
+    labelMedium =  TextStyle(
+    fontFamily = fontFamily,
+    fontWeight = FontWeight.Medium,
+    fontSize = 14.sp,
+    lineHeight = 20.sp
     )
 )
