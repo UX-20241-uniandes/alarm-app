@@ -1,59 +1,78 @@
 package com.example.alarma.ui.theme
 
+import android.os.Build
 import androidx.compose.material3.Typography
+import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.text.googlefonts.GoogleFont
-import androidx.compose.ui.text.googlefonts.Font
 import com.example.alarma.R
 
-val provider = GoogleFont.Provider(
-    providerAuthority = "com.google.android.gms.fonts",
-    providerPackage = "com.google.android.gms",
-    certificates = R.array.com_google_android_gms_fonts_certs
-)
 
-// Set of Material typography styles to start with
-val Montserrat = GoogleFont("Montserrat")
 val fontFamily = FontFamily(
     Font(
-        googleFont = Montserrat,
-        fontProvider = provider,
-        weight = FontWeight.Bold,
-        style = FontStyle.Italic
+        R.font.montserrat_regular,
+        weight = FontWeight.Bold
     )
 )
+
+@OptIn(ExperimentalTextApi::class)
+val fontFamilyRegular = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    FontFamily(
+        Font(
+            R.font.montserrat_wght,
+            variationSettings = FontVariation.Settings(
+                FontVariation.weight(400)
+            )
+        )
+    )
+} else {
+    fontFamily
+}
+
+@OptIn(ExperimentalTextApi::class)
+val fontFamilyMedium = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    FontFamily(
+        Font(
+            R.font.montserrat_wght,
+            variationSettings = FontVariation.Settings(
+                FontVariation.weight(500)
+            )
+        )
+    )
+} else {
+    fontFamily
+}
+
+
+@OptIn(ExperimentalTextApi::class)
+val fontFamilyBold = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    FontFamily(
+        Font(
+            R.font.montserrat_wght,
+            variationSettings = FontVariation.Settings(
+                FontVariation.weight(700)
+            )
+        )
+    )
+} else {
+    fontFamily
+}
+
+
 val Typography = Typography(
     bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
+        fontFamily = fontFamilyRegular,
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
     ),
-    /* Other default text styles to override
+    //Titulo Largo
     titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
-    ),
-    labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
-    )
-    */
-    /*Título Principal*/
-    titleLarge = TextStyle(
-        fontFamily = fontFamily,
-        fontWeight = FontWeight.Bold,
+        fontFamily = fontFamilyBold,
         fontSize = 24.sp,
         lineHeight = 28.sp,
         letterSpacing = 0.sp
@@ -61,8 +80,7 @@ val Typography = Typography(
 
     /*Subtítulo*/
     titleMedium = TextStyle(
-        fontFamily = fontFamily,
-        fontWeight = FontWeight.Normal,
+        fontFamily = fontFamilyRegular,
         fontSize = 22.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.sp
@@ -70,8 +88,7 @@ val Typography = Typography(
 
     /*Título interno*/
     titleSmall = TextStyle(
-        fontFamily = fontFamily,
-        fontWeight = FontWeight.Normal,
+        fontFamily = fontFamilyRegular,
         fontSize = 18.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.sp
@@ -79,26 +96,23 @@ val Typography = Typography(
 
     /*cuerpo*/
     bodyMedium = TextStyle(
-        fontFamily = fontFamily,
-        fontWeight = FontWeight.Normal,
+        fontFamily = fontFamilyRegular,
         fontSize = 14.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.sp
     ),
 
     /*boton*/
-    labelLarge =  TextStyle(
-    fontFamily = fontFamily,
-    fontWeight = FontWeight.Bold,
-    fontSize = 14.sp,
-    lineHeight = 20.sp
+    labelLarge = TextStyle(
+        fontFamily = fontFamilyBold,
+        fontSize = 14.sp,
+        lineHeight = 18.sp
     ),
 
     /*Acción*/
-    labelMedium =  TextStyle(
-    fontFamily = fontFamily,
-    fontWeight = FontWeight.Medium,
-    fontSize = 14.sp,
-    lineHeight = 20.sp
+    labelMedium = TextStyle(
+        fontFamily = fontFamilyMedium,
+        fontSize = 14.sp,
+        lineHeight = 20.sp
     )
 )

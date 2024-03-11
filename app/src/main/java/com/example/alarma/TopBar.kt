@@ -14,6 +14,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import com.example.alarma.ui.theme.Typography
 import java.util.concurrent.TimeUnit
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -23,14 +24,14 @@ fun TopBar(
     onclickDrawable: () -> Unit
 ){
     TopAppBar(
-        title = { Text(text = title) },
+        title = { Text(text = title, style = Typography.titleMedium) },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            titleContentColor = MaterialTheme.colorScheme.primary,
+            containerColor = MaterialTheme.colorScheme.primary,
+            titleContentColor = MaterialTheme.colorScheme.onPrimary,
         ),
         navigationIcon = {
             IconButton(onClick = { onclickDrawable()}) {
-                Icon(imageVector = Icons.Default.Menu, contentDescription = "Menu")
+                Icon(imageVector = Icons.Default.Menu, contentDescription = "Menu", tint = MaterialTheme.colorScheme.onPrimary)
             }
         }
     )
