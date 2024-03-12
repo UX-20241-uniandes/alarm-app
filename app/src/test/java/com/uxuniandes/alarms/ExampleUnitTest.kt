@@ -1,4 +1,4 @@
-package com.example.alarma
+package com.uxuniandes.alarms
 
 import org.junit.Test
 

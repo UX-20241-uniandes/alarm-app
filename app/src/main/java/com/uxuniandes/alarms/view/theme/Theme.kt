@@ -1,4 +1,4 @@
-package com.example.alarma.ui.theme
+package com.uxuniandes.alarms.view.theme
 
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -49,7 +49,7 @@ private val LightScheme = lightColorScheme(
 )
 
 @Composable
-fun AlarmaTheme(
+fun AlarmsTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
@@ -57,16 +57,16 @@ fun AlarmaTheme(
 ) {
     val view = LocalView.current
     if (!view.isInEditMode) {
-      SideEffect {
-        val window = (view.context as Activity).window
-        window.statusBarColor = LightScheme.primary.toArgb()
-        WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
-      }
+        SideEffect {
+            val window = (view.context as Activity).window
+            window.statusBarColor = LightScheme.primary.toArgb()
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+        }
     }
 
     MaterialTheme(
-      colorScheme = LightScheme,
-      typography = Typography,
-      content = content
+        colorScheme = LightScheme,
+        typography = AlarmTypography,
+        content = content
     )
 }

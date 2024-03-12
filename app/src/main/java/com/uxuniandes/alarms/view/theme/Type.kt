@@ -1,4 +1,4 @@
-package com.example.alarma.ui.theme
+package com.uxuniandes.alarms.view.theme
 
 import android.os.Build
 import androidx.compose.material3.Typography
@@ -9,7 +9,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.example.alarma.R
+import com.uxuniandes.alarms.R
 
 
 val fontFamily = FontFamily(
@@ -63,7 +63,7 @@ val fontFamilyBold = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 }
 
 
-val Typography = Typography(
+val AlarmTypography = Typography(
     bodyLarge = TextStyle(
         fontFamily = fontFamilyRegular,
         fontSize = 16.sp,
@@ -90,7 +90,7 @@ val Typography = Typography(
     titleSmall = TextStyle(
         fontFamily = fontFamilyRegular,
         fontSize = 18.sp,
-        lineHeight = 20.sp,
+        lineHeight = 28.sp,
         letterSpacing = 0.sp
     ),
 
@@ -114,5 +114,11 @@ val Typography = Typography(
         fontFamily = fontFamilyMedium,
         fontSize = 14.sp,
         lineHeight = 20.sp
+    ),
+    /*Acción*/
+    labelSmall = TextStyle(
+        fontFamily = fontFamilyRegular,
+        fontSize = 12.sp,
+        lineHeight = 18.sp
     )
 )

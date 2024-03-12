@@ -1,4 +1,5 @@
-package com.example.alarma
+package com.uxuniandes.alarms.view.screens
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun PantallaCrearAlarma(){
+fun CreateAlarmPauseScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -26,7 +27,7 @@ fun PantallaCrearAlarma(){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Pantalla Crear alarma",
+                text = "Home",
                 fontSize = 20.sp,
                 color = Color.White
             )

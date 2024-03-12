@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">Alarma</string>
+    <string name="app_name">alarms</string>
+    <string name="home_title">Alarma App</string>
+    <string name="create_alarm_std_title">Crear alarma estándar</string>
+    <string name="create_alarm_pause_title">Crear alarma pausa activa</string>
+    <string name="add_subscription_title">Añadir Suscripción</string>
+    <string name="alarm_list_title">Lista de alarmas</string>
+    <string name="back_button">Volver</string>
+    <string name="pause_alarm_text">Alarma pausa activa</string>
+    <string name="alarm">alarma</string>
+    <string name="pause_alarm_lead">Crea tu alarma para mantenerte en movimiento</string>
+    <string name="create_alarm_to_pause">Crear alarma para pausa activa</string>
+    <string name="day_alarms">Alarmas del día</string>
+    <string name="delete">Eliminar</string>
+    <string name="disable">Deshabilitar</string>
+    <string name="delete_alarm">Eliminar Alarma</string>
 </resources>
