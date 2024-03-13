@@ -64,6 +64,7 @@ val fontFamilyBold = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
 
 val AlarmTypography = Typography(
+
     bodyLarge = TextStyle(
         fontFamily = fontFamilyRegular,
         fontSize = 16.sp,

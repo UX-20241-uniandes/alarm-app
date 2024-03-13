@@ -7,12 +7,12 @@ import androidx.navigation.compose.rememberNavController
 import com.uxuniandes.alarms.view.fragments.ConfirmCreateAlarm
 
 @Composable
-fun CreateAlarmStdStep2Screen(navController: NavHostController) {
+fun CreateAlarmPauseStep2Screen(navController: NavHostController) {
     ConfirmCreateAlarm(navController)
 }
 
 @Preview(showBackground = true)
 @Composable
-fun CreateAlarmStdStep2Preview() {
-    CreateAlarmStdStep2Screen(rememberNavController())
+fun CreateAlarmPauseStep2Preview() {
+    CreateAlarmPauseStep2Screen(rememberNavController())
 }

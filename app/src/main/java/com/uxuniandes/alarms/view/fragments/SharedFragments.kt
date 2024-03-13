@@ -1,6 +1,8 @@
 package com.uxuniandes.alarms.view.fragments
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -12,13 +14,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.outlined.DateRange
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DatePicker
-import androidx.compose.material3.DatePickerColors
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DatePickerState
 import androidx.compose.material3.DropdownMenuItem
@@ -30,10 +35,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconToggleButtonColors
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TimePicker
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
@@ -49,13 +56,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.navigation.NavController
 import com.uxuniandes.alarms.R
+import com.uxuniandes.alarms.view.screens.AlarmAppScreen
 import com.uxuniandes.alarms.view.theme.AlarmTypography
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -183,7 +197,10 @@ fun AlarmDatePicker() {
             ) {
                 Text("Aceptar")
             }
-        }, modifier = Modifier.fillMaxSize().background(Color(0x80000000))) {
+        }, modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0x80000000))
+        ) {
             DatePicker(state = datePickerState)
         }
     }
@@ -203,9 +220,11 @@ fun TimePickerDialog(
             usePlatformDefaultWidth = false
         )
     ) {
-        Box(modifier = Modifier
-            .background(Color(0x80000000))
-            .fillMaxSize(), contentAlignment = Alignment.Center) {
+        Box(
+            modifier = Modifier
+                .background(Color(0x80000000))
+                .fillMaxSize(), contentAlignment = Alignment.Center
+        ) {
 
             Surface(
                 shape = MaterialTheme.shapes.extraLarge,
@@ -336,4 +355,106 @@ fun AlarmInput(label: String) {
             }
         }
     )
+}
+
+@Composable
+fun InputNumber(value: String, label: String) {
+    var textState by remember { mutableStateOf(TextFieldValue(value)) }
+    val pattern = remember { Regex("^\\d{2}$") }
+    Column(modifier = Modifier.width(96.dp)) {
+        OutlinedTextField(
+            value = textState,
+            onValueChange = {
+                val tt = it.text
+                if (tt.isEmpty() || tt.matches(pattern)) {
+                    textState = it
+                }
+            },
+            supportingText = { Text(text = label) },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            textStyle = TextStyle(
+                fontSize = 45.sp,
+                textAlign = TextAlign.Center
+            ),
+            colors = OutlinedTextFieldDefaults.colors().copy(
+                focusedContainerColor = MaterialTheme.colorScheme.primaryContainer
+            )
+        )
+    }
+}
+
+@Composable
+fun ConfirmCreateAlarm(navController: NavController) {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 24.dp, vertical = 52.dp),
+        verticalArrangement = Arrangement.spacedBy(52.dp)
+    ) {
+        item {
+            Image(
+                painter = painterResource(id = R.drawable.bell),
+                contentDescription = stringResource(R.string.alarm),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .width(233.dp)
+                    .height(195.dp)
+            )
+        }
+        item {
+            Text(
+                text = "Nombre de la alarma",
+                color = MaterialTheme.colorScheme.primary,
+                style = AlarmTypography.titleMedium,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+        item {
+            AlarmInput("Nombre")
+        }
+        item {
+            var showDialog by remember { mutableStateOf(false) }
+            Button(
+                onClick = { showDialog = true },
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(
+                    "Crear Alarma",
+                    style = AlarmTypography.labelLarge
+                )
+            }
+
+            if (showDialog) {
+                AlertDialog(
+                    onDismissRequest = { showDialog = false },
+                    title = {
+                        Text(
+                            "Alarma Exitosa",
+                            style = AlarmTypography.titleLarge,
+                        )
+                    },
+                    text = {
+                        Text(
+                            "Alarma creada satisfactoriamente.",
+                            style = AlarmTypography.bodyMedium,
+                        )
+                    },
+                    confirmButton = {
+                        TextButton(
+                            onClick = {
+                                showDialog = false
+                                navController.navigate(AlarmAppScreen.Home.name)
+                            }
+                        ) {
+                            Text(
+                                "Aceptar",
+                                style = AlarmTypography.labelMedium,
+                            )
+                        }
+                    }
+                )
+            }
+        }
+    }
 }

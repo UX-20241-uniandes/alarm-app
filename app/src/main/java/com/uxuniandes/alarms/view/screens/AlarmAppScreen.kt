@@ -42,6 +42,7 @@ enum class AlarmAppScreen(@StringRes val title: Int) {
     CreateAlarmStd(title = R.string.create_alarm_std_title),
     CreateAlarmStdStep2(title = R.string.create_alarm_std_title),
     CreateAlarmPause(title = R.string.create_alarm_pause_title),
+    CreateAlarmPauseStep2(title = R.string.create_alarm_pause_title),
     AddSubscription(title = R.string.add_subscription_title),
     AlarmList(title = R.string.alarm_list_title)
 }
@@ -177,7 +178,10 @@ fun AlarmApp(
                             CreateAlarmStdStep2Screen(navController)
                         }
                         composable(AlarmAppScreen.CreateAlarmPause.name) {
-                            CreateAlarmPauseScreen()
+                            CreateAlarmPauseScreen(navController)
+                        }
+                        composable(AlarmAppScreen.CreateAlarmPauseStep2.name) {
+                            CreateAlarmPauseStep2Screen(navController)
                         }
                         composable(AlarmAppScreen.AlarmList.name) {
                             AlarmListScreen()
