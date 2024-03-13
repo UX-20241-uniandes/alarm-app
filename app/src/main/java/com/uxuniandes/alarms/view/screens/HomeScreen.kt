@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Button
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
@@ -34,7 +35,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
@@ -48,8 +48,6 @@ import com.uxuniandes.alarms.view.theme.AlarmTypography
 fun HomeScreen(
     navController: NavHostController
 ) {
-    var isExpanded by remember { mutableStateOf(false) }
-
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -170,15 +168,12 @@ fun HomeScreen(
             }
         }
     }
-    Column(
+    Box(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(32.dp)
+        contentAlignment = Alignment.BottomEnd
     ) {
 
         CustomFloatingActionButton(
-            expandable = true,
-            onFabClick = { isExpanded = !isExpanded },
-            fabIcon = Icons.Default.Add,
             navController = navController
         )
     }
@@ -187,39 +182,29 @@ fun HomeScreen(
 
 @Composable
 fun CustomFloatingActionButton(
-    expandable: Boolean,
-    onFabClick: () -> Unit,
-    fabIcon: ImageVector,
     navController: NavHostController
 ) {
     var isExpanded by remember { mutableStateOf(false) }
 
-    val fabSize = 120.dp
-    val expandedFabWidth by animateDpAsState(
-        targetValue = if (isExpanded) 360.dp else fabSize,
-        animationSpec = spring(dampingRatio = 3f)
+    val offsetButtons by animateDpAsState(
+        targetValue = if (isExpanded) 0.dp else 250.dp,
+        animationSpec = spring(dampingRatio = 3f), label = ""
     )
-    val expandedFabHeight by animateDpAsState(
-        targetValue = if (isExpanded) 160.dp else fabSize,
-        animationSpec = spring(dampingRatio = 3f)
-    )
-
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.height(250.dp).fillMaxSize(),
         contentAlignment = Alignment.BottomEnd
     ) {
         Box(
             modifier = Modifier
-                .offset(y = (-16).dp)
-                .size(
-                    width = expandedFabWidth,
-                    height = (animateDpAsState(if (isExpanded) 300.dp else 0.dp, animationSpec = spring(dampingRatio = 4f))).value)
+                .offset(y = offsetButtons)
 
         ) {
             Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .padding(end = 16.dp)
+                    .fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.End
             ) {
                 FloatingActionButton(
                     onClick = { navController.navigate(AlarmAppScreen.CreateAlarmStd.name) }
@@ -227,7 +212,6 @@ fun CustomFloatingActionButton(
                     Text(
                         text = stringResource(R.string.create_alarm_pause_title),
                         modifier = Modifier
-                            .fillMaxWidth()
                             .padding(horizontal = 26.dp),
                         textAlign = TextAlign.Center,
                         style = AlarmTypography.titleMedium,
@@ -241,7 +225,6 @@ fun CustomFloatingActionButton(
                     Text(
                         text = stringResource(R.string.create_alarm_std_title),
                         modifier = Modifier
-                            .fillMaxWidth()
                             .padding(horizontal = 26.dp),
                         textAlign = TextAlign.Center,
                         style = AlarmTypography.titleMedium,
@@ -254,32 +237,21 @@ fun CustomFloatingActionButton(
 
         FloatingActionButton(
             onClick = {
-                onFabClick()
-                if (expandable) {
-                    isExpanded = !isExpanded
-                }
+                isExpanded = !isExpanded
             },
             modifier = Modifier
-                .width(expandedFabWidth)
-                .height(expandedFabHeight)
+                .width(120.dp)
+                .height(120.dp)
                 .padding(16.dp),
             shape = CircleShape
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
-                    imageVector = fabIcon,
+                    imageVector = if (isExpanded) Icons.Filled.Clear else Icons.Filled.Add,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(48.dp)
                 )
-                if (isExpanded) {
-                    Text(
-                        text = "Crear",
-                        style = AlarmTypography.titleLarge,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.padding(start = 8.dp)
-                    )
-                }
             }
         }
     }
