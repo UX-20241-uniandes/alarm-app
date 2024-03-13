@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DatePicker
@@ -312,6 +313,27 @@ fun AlarmDropdown(items: Array<String>) {
                 }
             }
         }
-
     }
+}
+
+@Composable
+fun AlarmInput(label: String) {
+    var textState by remember { mutableStateOf(TextFieldValue()) }
+    OutlinedTextField(
+        value = textState,
+        onValueChange = { textState = it },
+        label = { Text(label) },
+        modifier = Modifier.fillMaxWidth(),
+        trailingIcon = {
+            if (textState.text.isNotEmpty()) {
+                IconButton(onClick = { textState = TextFieldValue() }) {
+                    CircleIcon(
+                        icon = Icons.Default.Clear,
+                        contentDescription = "Clear text",
+                        backgroundColor = Color.Gray
+                    )
+                }
+            }
+        }
+    )
 }

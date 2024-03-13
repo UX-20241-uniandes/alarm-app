@@ -82,7 +82,7 @@ val AlarmTypography = Typography(
     titleMedium = TextStyle(
         fontFamily = fontFamilyRegular,
         fontSize = 22.sp,
-        lineHeight = 20.sp,
+        lineHeight = 28.sp,
         letterSpacing = 0.sp
     ),
 

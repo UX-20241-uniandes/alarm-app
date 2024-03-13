@@ -40,6 +40,7 @@ import kotlinx.coroutines.launch
 enum class AlarmAppScreen(@StringRes val title: Int) {
     Home(title = R.string.home_title),
     CreateAlarmStd(title = R.string.create_alarm_std_title),
+    CreateAlarmStdStep2(title = R.string.create_alarm_std_title),
     CreateAlarmPause(title = R.string.create_alarm_pause_title),
     AddSubscription(title = R.string.add_subscription_title),
     AlarmList(title = R.string.alarm_list_title)
@@ -170,7 +171,10 @@ fun AlarmApp(
                             HomeScreen(navController)
                         }
                         composable(AlarmAppScreen.CreateAlarmStd.name) {
-                            CreateAlarmStdScreen()
+                            CreateAlarmStdScreen(navController)
+                        }
+                        composable(AlarmAppScreen.CreateAlarmStdStep2.name) {
+                            CreateAlarmStdStep2Screen(navController)
                         }
                         composable(AlarmAppScreen.CreateAlarmPause.name) {
                             CreateAlarmPauseScreen()

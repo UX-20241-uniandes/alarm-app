@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.uxuniandes.alarms.R
+import com.uxuniandes.alarms.view.fragments.AlarmInput
 import com.uxuniandes.alarms.view.fragments.CircleIcon
 import com.uxuniandes.alarms.view.theme.AlarmTypography
 
@@ -53,7 +54,9 @@ fun AddSubscriptionScreen() {
                 Image(
                     painter = painterResource(id = R.drawable.subscription),
                     contentDescription = "alarma",
-                    modifier = Modifier.width(280.dp).height(280.dp)
+                    modifier = Modifier
+                        .width(280.dp)
+                        .height(280.dp)
                 )
             }
         }
@@ -77,23 +80,7 @@ fun AddSubscriptionScreen() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 26.dp, vertical = 8.dp)) {
-                OutlinedTextField(
-                    value = textState,
-                    onValueChange = { textState = it },
-                    label = { Text("Codigo de la suscripción") },
-                    modifier = Modifier.fillMaxWidth(),
-                    trailingIcon = {
-                        if (textState.text.isNotEmpty()) {
-                            IconButton(onClick = { textState = TextFieldValue() }) {
-                                CircleIcon(
-                                    icon = Icons.Default.Clear,
-                                    contentDescription = "Clear text",
-                                    backgroundColor = Color.Gray
-                                )
-                            }
-                        }
-                    }
-                )
+                AlarmInput("Código de la suscripción")
             }
         }
 

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material3.Button
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -34,6 +34,8 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.uxuniandes.alarms.R
 import com.uxuniandes.alarms.view.fragments.AlarmCheckbox
 import com.uxuniandes.alarms.view.fragments.AlarmDatePicker
@@ -44,7 +46,7 @@ import com.uxuniandes.alarms.view.fragments.FilledCharButton
 import com.uxuniandes.alarms.view.theme.AlarmTypography
 
 @Composable
-fun CreateAlarmStdScreen() {
+fun CreateAlarmStdScreen(navController: NavHostController) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -189,6 +191,18 @@ fun CreateAlarmStdScreen() {
                 })
         }
         item {
+            Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()) {
+                Button(
+                    onClick = { navController.navigate(AlarmAppScreen.CreateAlarmStdStep2.name) },
+                ) {
+                    Text(
+                        "Siguiente",
+                        style = AlarmTypography.labelLarge
+                    )
+                }
+            }
+        }
+        item {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -202,5 +216,5 @@ fun CreateAlarmStdScreen() {
 @Preview(showBackground = true)
 @Composable
 fun CreateAlarmStdPreview() {
-    CreateAlarmStdScreen()
+    CreateAlarmStdScreen(rememberNavController())
 }
